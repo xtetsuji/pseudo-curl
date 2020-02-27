@@ -10,7 +10,13 @@ import (
 )
 
 func main() {
-	url := os.Args[1]
+	var url string
+	if os.Args[1][0:4] == "http" {
+		url = os.Args[1]
+	} else {
+		// 決め打ちで申し訳ないけれど、とりあえず
+		url = os.Args[2]
+	}
 	if len(url) == 0 {
 		log.Fatal("first argument is required")
 		os.Exit(1)
