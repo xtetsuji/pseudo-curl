@@ -21,6 +21,9 @@ func main() {
 		log.Fatal(geterr)
 		os.Exit(1)
 	}
+	if res.StatusCode < 200 || res.StatusCode >= 300 {
+		log.Fatal("HTTP Response is not valid: " + res.Status)
+	}
 	body, reserr := ioutil.ReadAll(res.Body)
 	if reserr != nil {
 		log.Fatal(reserr)
