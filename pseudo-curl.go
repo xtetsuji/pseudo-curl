@@ -6,6 +6,7 @@ import (
 	"log"
 	"io/ioutil"
 	"net/http"
+	"crypto/tls"
 )
 
 func main() {
@@ -14,6 +15,7 @@ func main() {
 		log.Fatal("first argument is required")
 		os.Exit(1)
 	}
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	res, geterr := http.Get(url)
 	if geterr != nil {
 		log.Fatal(geterr)
